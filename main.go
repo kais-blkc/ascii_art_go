@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/kais-blkc/ascii_art/internal/convert"
 	imageutils "github.com/kais-blkc/ascii_art/internal/image_utils"
@@ -37,5 +38,12 @@ func main() {
 	fmt.Printf("Image resized size: %dx%d\n", img.Bounds().Dx(), img.Bounds().Dy())
 
 	ascii := imageutils.ImageToASCII(img)
-	fmt.Println(ascii)
+	// fmt.Println(ascii)
+
+	asciiArr := strings.Split(ascii, "\n")
+
+	err := imageutils.AsciiToImage(asciiArr, "output.jpg")
+	if err != nil {
+		log.Fatalf("Failed to save image: %v", err)
+	}
 }

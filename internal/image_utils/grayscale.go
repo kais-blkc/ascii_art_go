@@ -8,7 +8,8 @@ func PixelToGray(r, g, b uint32) uint8 {
 	return uint8(gray)
 }
 
-var asciiRamp = "@%#*+=-:. " // Чем левее, тем темнее символ
+// var asciiRamp = "@%#*+=-:. " // Чем левее, тем темнее символ
+var asciiRamp = " .:-=+*#%@" // Чем левее, тем темнее символ
 
 func GrayToAscii(gray uint8) string {
 	scale := float64(gray) / 255.0
