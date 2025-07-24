@@ -1,88 +1,56 @@
-# ASCII Art Generator
+# 🖼️ ASCII Art Converter
 
-This project is a Terminal User Interface (TUI) application for converting images (JPEG, PNG) into ASCII art.
+Convert your images to ASCII art with an optional TUI interface built in Go!
 
-## Description
+## ✨ Features
 
-The application allows users to select an image from their filesystem, configure conversion parameters, and save the resulting ASCII art as a new JPEG image.
+- 🖥️ TUI (Terminal UI) to interactively convert images to ASCII
+- 🔁 Converts image to ASCII representation using custom ramps
+- 📏 Resize images with specified width
+- 🧱 Save the output as a JPEG image
+- 🧑‍💻 Command-line support for quick conversions
 
-## Features
+## 🛠 Installation
 
--   Interactive terminal-based interface.
--   Preview the selected image as ASCII art.
--   Customize parameters for ASCII art generation.
--   Save the result as a JPEG file.
-
-## Installation
-
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    cd ascii_art_go
-    ```
-
-2.  **Install dependencies:**
-    Ensure you have Go installed (version 1.24 or newer). The dependencies will be downloaded automatically when you build or run the project.
-
-## Usage
-
-There are several ways to run the application.
-
-### 1. Using `go run`
-
-This is the simplest way to run the application.
+### Option 1: Install via `go install`
 
 ```bash
-go run main.go
+go install github.com/kais-blkc/ascii_art/cmd/goascii@latest
 ```
+This will download, build, and install the goascii binary into your $GOBIN directory (usually ~/go/bin). Make sure it's in your PATH.
 
-### 2. Build and Run the Binary
-
-You can build the application and then run the compiled binary.
-
+### Option 2: Manual clone & build
 ```bash
-# Build
-go build -o ascii-art-generator .
-
-# Run
-./ascii-art-generator
+git clone https://github.com/kais-blkc/ascii_art.git
+cd ascii_art/cmd/goascii
+go build -o goascii
 ```
 
-### 3. For Development (with `air`)
-
-The project is configured to use `air` for live reloading during development.
-
-1.  **Install `air`:**
-    ```bash
-    go install github.com/cosmtrek/air@latest
-    ```
-
-2.  **Run `air`:**
-    ```bash
-    air
-    ```
-    `air` will automatically rebuild and restart the application whenever the source code changes.
-
-## Key Dependencies
-
--   [github.com/rivo/tview](https://github.com/rivo/tview) - For building the terminal user interface.
--   [github.com/nfnt/resize](https://github.com/nfnt/resize) - For resizing images.
--   [golang.org/x/image](https://pkg.go.dev/golang.org/x/image) - For image manipulation.
-
-## Project Structure
-
+## 🚀 Usage
+### 1. Run with TUI
+Simply launch the app:
+```bash
+ascii_art
 ```
-.
-├── internal/         # Internal application logic
-│   ├── convert/      # Image conversion functions
-│   ├── image_utils/  # Image manipulation utilities
-│   ├── shared/       # Shared code (constants, events)
-│   └── ui/           # User interface components
-├─��� main.go           # Application entry point
-├── go.mod            # Go dependencies file
-└── .air.toml         # Configuration for live-reload
+This will start an interactive terminal UI for converting your image.
+
+### 2. Run in CLI mode (without UI)
+```bash
+goascii <input-file> <width>
 ```
 
-## License
+Example:
+```bash
+goascii ./example.jpg 100
+```
 
-This project is unlicensed. Feel free to add a license if needed.
+This will:
+- Load example.jpg
+- Resize it to width 100
+- Convert it to ASCII
+- Save the result as output.jpg in the current directory
+- If width is invalid, it defaults to 80.
+
+
+
+
