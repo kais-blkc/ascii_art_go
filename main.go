@@ -5,45 +5,45 @@ import (
 	"log"
 	"os"
 	"strconv"
-	"strings"
 
 	"github.com/kais-blkc/ascii_art/internal/convert"
 	imageutils "github.com/kais-blkc/ascii_art/internal/image_utils"
+	"github.com/kais-blkc/ascii_art/internal/shared/constants"
+	"github.com/kais-blkc/ascii_art/internal/ui"
 )
 
 func getWidth() uint {
-	if os.Args[2] != "" {
-		width, err := strconv.Atoi(os.Args[2])
+	width := os.Args[2]
 
-		if err == nil {
-			return uint(width)
-		}
+	widthInt, err := strconv.Atoi(width)
+	if err != nil {
+		log.Println("Invalid width argument:", width)
+		return uint(80)
 	}
 
-	return uint(80)
+	return uint(widthInt)
 }
 
-func main() {
-	if len(os.Args) < 2 {
-		log.Println("Usage: go run main.go <image_path> [width]")
-		return
-	}
-
+func convertImgToAscii() {
 	width := getWidth()
 	path := os.Args[1]
 	img := convert.LoadImage(path)
 	fmt.Printf("Image original size: %dx%d\n", img.Bounds().Dx(), img.Bounds().Dy())
 
-	img = convert.ResizeImage(img, width)
+	img = convert.ResizeImage(img, width, false)
 	fmt.Printf("Image resized size: %dx%d\n", img.Bounds().Dx(), img.Bounds().Dy())
 
-	ascii := imageutils.ImageToASCII(img)
-	// fmt.Println(ascii)
-
-	asciiArr := strings.Split(ascii, "\n")
-
-	err := imageutils.AsciiToImage(asciiArr, "output.jpg")
+	err := imageutils.AsciiToImageRGB(img, "output.jpg", constants.AsciiRampDefault)
 	if err != nil {
 		log.Fatalf("Failed to save image: %v", err)
 	}
+}
+
+func main() {
+	if len(os.Args) >= 2 {
+		convertImgToAscii()
+		return
+	}
+
+	ui.StartUI()
 }

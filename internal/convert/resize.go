@@ -6,14 +6,20 @@ import (
 	"github.com/nfnt/resize"
 )
 
-func ResizeImage(img image.Image, width uint) image.Image {
+func ResizeImage(img image.Image, width uint, forTerminal bool) image.Image {
 	originalWidth := img.Bounds().Dx()
 	originalHeight := img.Bounds().Dy()
 
-	ratio := 0.5
 	aspectRatio := float64(originalHeight) / float64(originalWidth)
-	adjustedAspectRatio := aspectRatio * ratio
-	newHeight := uint(float64(width) * adjustedAspectRatio)
+	var newHeight uint
+
+	if forTerminal {
+		ratio := 0.5
+		adjustedAspectRatio := aspectRatio * ratio
+		newHeight = uint(float64(width) * adjustedAspectRatio)
+	} else {
+		newHeight = uint(float64(width) * aspectRatio)
+	}
 
 	return resize.Resize(width, newHeight, img, resize.Lanczos3)
 }

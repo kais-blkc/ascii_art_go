@@ -1,0 +1,45 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Cache go
+/pkg/
+/bin/
+
+# Cache and ide
+*.log
+*.tmp
+*.swp
+*.swo
+*.DS_Store
+.idea/
+.vscode/
+*.iml
+
+# Build artifacts
+ascii_art  
+
+# Modules
+vendor/
+
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.webp
+
+# Temp files
+/testdata/
+*.old
+*.bak
+*.orig
+*.save
+
